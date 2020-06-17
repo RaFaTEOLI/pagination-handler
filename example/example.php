@@ -30,18 +30,22 @@ if (isset($_GET["page"])) {
 
 $results = $select->getHelpTopics($conn, $pageLimit, $pageOffset);
 $numberOfPages = $pagination->getNumberOfPages($select->getHelpTopicsCount($conn));
+$numberOfPagesAux = $numberOfPages;
 mysqli_close($conn);
 
 $pagesToList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 if ($page > 9 && $numberOfPages > 9) {
     $pagesToList = [];
-	if ($page < $numberOfPages - 10) {
-		$numberOfPages = $page;
-	}
-    for ($i = ($numberOfPages - 10); $i <= $numberOfPages; $i++) {
-        array_push($pagesToList, $i);
+	
+    if ($page < $numberOfPages - 10) {
+		$numberOfPages = $page + 10;
     }
+
+	for ($i = ($numberOfPages - 10); $i <= $numberOfPages; $i++) {
+		array_push($pagesToList, $i);
+	}
+    
 }
 /* End of Pagination Config */
 ?>
@@ -80,6 +84,7 @@ if ($page > 9 && $numberOfPages > 9) {
     <input type="hidden" id="site-url-php" value="localhost/pagination-handler/">
     <input type="hidden" id="page-name" value="example/example.php">
     <input type="hidden" id="current-page" value="<?= ($page) ? $page : 1 ?>">
+	<input type="hidden" id="number-of-pages" value="<?= ($numberOfPagesAux) ? $numberOfPagesAux : 1 ?>">
     <nav aria-label="Page navigation example">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" id="previousPage" href="">Anterior</a></li>
