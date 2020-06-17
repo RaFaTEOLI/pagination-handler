@@ -33,7 +33,15 @@ $numberOfPages = $pagination->getNumberOfPages($select->getHelpTopicsCount($conn
 $numberOfPagesAux = $numberOfPages;
 mysqli_close($conn);
 
-$pagesToList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+$pagesToList = [];
+
+if ($numberOfPages < 10) {
+    for ($i = 1; $i <= $numberOfPages; $i++) {
+        array_push($pagesToList, $i);
+    }  
+} else {
+    $pagesToList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+}
 
 if ($page > 9 && $numberOfPages > 9) {
     $pagesToList = [];
