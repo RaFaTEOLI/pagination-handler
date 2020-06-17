@@ -5,7 +5,7 @@ include_once('selectExample.php');
 
 $conn = mysqli_connect("127.0.0.1", "root", "", "mysql");
 
-$path = "/pagination-plugin/example/example.php";
+$path = "/pagination-handler/example/example.php";
 
 $select = new SelectExample();
 
@@ -77,7 +77,7 @@ if ($page > 9 && $numberOfPages > 9) {
 	<?php } ?>
 	</div>
     <!-- Pagination Config -->
-    <input type="hidden" id="site-url-php" value="localhost/pagination-plugin/">
+    <input type="hidden" id="site-url-php" value="localhost/pagination-handler/">
     <input type="hidden" id="page-name" value="example/example.php">
     <input type="hidden" id="current-page" value="<?= ($page) ? $page : 1 ?>">
     <nav aria-label="Page navigation example">
